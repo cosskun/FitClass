@@ -65,26 +65,29 @@ class DashboardView extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Merhaba, Şampiyon! 👋',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: isDark ? AppTheme.darkText : AppTheme.textDark,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Merhaba, Şampiyon! 👋',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: isDark ? AppTheme.darkText : AppTheme.textDark,
+                      ),
                     ),
-                  ),
-                  Text(
-                    DateFormat('dd MMMM yyyy, EEEE', 'tr_TR').format(DateTime.now()),
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: isDark ? AppTheme.darkTextLight : AppTheme.textLight,
+                    Text(
+                      DateFormat('dd MMMM yyyy, EEEE', 'tr_TR').format(DateTime.now()),
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: isDark ? AppTheme.darkTextLight : AppTheme.textLight,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
+              const SizedBox(width: 12),
               Container(
                 decoration: BoxDecoration(
                   color: isDark ? AppTheme.darkPrimary.withValues(alpha: 0.2) : AppTheme.primaryLight,
@@ -290,39 +293,44 @@ class DashboardView extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF00B4D8).withValues(alpha: 0.15),
-                            borderRadius: BorderRadius.circular(12),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF00B4D8).withValues(alpha: 0.15),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Icon(Icons.water_drop, color: Color(0xFF00B4D8), size: 22),
                           ),
-                          child: const Icon(Icons.water_drop, color: Color(0xFF00B4D8), size: 22),
-                        ),
-                        const SizedBox(width: 12),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Su Takibi',
-                              style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold,
-                                color: isDark ? AppTheme.darkText : AppTheme.textDark,
-                              ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Su Takibi',
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold,
+                                    color: isDark ? AppTheme.darkText : AppTheme.textDark,
+                                  ),
+                                ),
+                                Text(
+                                  'Hedef: ${waterGoal.toInt()} ml',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: isDark ? AppTheme.darkTextLight : AppTheme.textLight,
+                                  ),
+                                ),
+                              ],
                             ),
-                            Text(
-                              'Hedef: ${waterGoal.toInt()} ml',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: isDark ? AppTheme.darkTextLight : AppTheme.textLight,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                          ),
+                        ],
+                      ),
                     ),
+                    const SizedBox(width: 8),
                     Text(
                       '$todayWaterMl ml',
                       style: const TextStyle(
@@ -526,13 +534,16 @@ class DashboardView extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'Antrenmanda Yakılan:',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: isDark ? AppTheme.darkTextLight : AppTheme.textLight,
+                    Expanded(
+                      child: Text(
+                        'Antrenmanda Yakılan:',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: isDark ? AppTheme.darkTextLight : AppTheme.textLight,
+                        ),
                       ),
                     ),
+                    const SizedBox(width: 8),
                     Text(
                       '🔥 ${todayWorkoutSummary.caloriesInt} kcal (${todayWorkoutSummary.completedSets} set)',
                       style: TextStyle(
@@ -549,13 +560,16 @@ class DashboardView extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'Hedefe Kalan Protein:',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: isDark ? AppTheme.darkTextLight : AppTheme.textLight,
+                    Expanded(
+                      child: Text(
+                        'Hedefe Kalan Protein:',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: isDark ? AppTheme.darkTextLight : AppTheme.textLight,
+                        ),
                       ),
                     ),
+                    const SizedBox(width: 8),
                     Text(
                       remainingProtein > 0 
                           ? '${remainingProtein.toInt()} g daha almalısın'

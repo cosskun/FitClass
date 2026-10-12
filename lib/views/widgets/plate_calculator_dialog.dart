@@ -67,29 +67,34 @@ class _PlateCalculatorDialogState extends State<PlateCalculatorDialog> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: isDark ? AppTheme.darkPrimary.withValues(alpha: 0.2) : AppTheme.primaryLight,
-                          borderRadius: BorderRadius.circular(12),
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: isDark ? AppTheme.darkPrimary.withValues(alpha: 0.2) : AppTheme.primaryLight,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Icon(
+                            Icons.calculate_outlined,
+                            color: isDark ? AppTheme.darkPrimary : AppTheme.primaryDark,
+                          ),
                         ),
-                        child: Icon(
-                          Icons.calculate_outlined,
-                          color: isDark ? AppTheme.darkPrimary : AppTheme.primaryDark,
+                        const SizedBox(width: 12),
+                        Flexible(
+                          child: Text(
+                            'Bar Plaka Hesaplayıcı',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: isDark ? AppTheme.darkText : AppTheme.textDark,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 12),
-                      Text(
-                        'Bar Plaka Hesaplayıcı',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: isDark ? AppTheme.darkText : AppTheme.textDark,
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   IconButton(
                     onPressed: () => Navigator.pop(context),
@@ -137,22 +142,19 @@ class _PlateCalculatorDialogState extends State<PlateCalculatorDialog> {
                 ),
               ),
               const SizedBox(height: 8),
-              Row(
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
                 children: [
-                  Expanded(
-                    child: ChoiceChip(
-                      label: const Text('20 kg (Olimpik)'),
-                      selected: _barWeight == 20.0,
-                      onSelected: (val) => setState(() => _barWeight = 20.0),
-                    ),
+                  ChoiceChip(
+                    label: const Text('20 kg (Olimpik)'),
+                    selected: _barWeight == 20.0,
+                    onSelected: (val) => setState(() => _barWeight = 20.0),
                   ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: ChoiceChip(
-                      label: const Text('10 kg (EZ Bar)'),
-                      selected: _barWeight == 10.0,
-                      onSelected: (val) => setState(() => _barWeight = 10.0),
-                    ),
+                  ChoiceChip(
+                    label: const Text('10 kg (EZ Bar)'),
+                    selected: _barWeight == 10.0,
+                    onSelected: (val) => setState(() => _barWeight = 10.0),
                   ),
                 ],
               ),

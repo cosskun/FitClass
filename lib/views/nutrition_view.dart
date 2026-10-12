@@ -63,15 +63,19 @@ class _NutritionViewState extends State<NutritionView> {
     showModalBottomSheet(
       context: context,
       backgroundColor: isDark ? AppTheme.darkSurface : Colors.white,
+      isScrollControlled: true,
+      useSafeArea: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
       ),
       builder: (context) {
-        return DefaultTabController(
-          length: 3,
-          child: Container(
-            padding: const EdgeInsets.all(24),
-            height: 560,
+        return SafeArea(
+          top: false,
+          child: DefaultTabController(
+            length: 3,
+            child: Container(
+              padding: const EdgeInsets.all(24),
+              height: MediaQuery.of(context).size.height * 0.78,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -221,9 +225,10 @@ class _NutritionViewState extends State<NutritionView> {
               ],
             ),
           ),
-        );
-      },
-    );
+        ),
+      );
+    },
+  );
   }
 
   // Meal Templates Tab View
@@ -453,12 +458,15 @@ class _NutritionViewState extends State<NutritionView> {
                   },
                   icon: const Icon(Icons.arrow_back_ios, size: 20),
                 ),
-                Text(
-                  DateFormat('dd MMMM yyyy, EEEE', 'tr_TR').format(_selectedDate),
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: isDark ? AppTheme.darkText : AppTheme.textDark,
+                Flexible(
+                  child: Text(
+                    DateFormat('dd MMMM yyyy, EEEE', 'tr_TR').format(_selectedDate),
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: isDark ? AppTheme.darkText : AppTheme.textDark,
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 IconButton(

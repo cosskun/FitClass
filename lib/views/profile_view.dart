@@ -307,43 +307,50 @@ class _ProfileViewState extends State<ProfileView> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: (isDark ? AppTheme.darkPrimary : AppTheme.primary).withValues(alpha: 0.15),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Icon(
-                          isDark ? Icons.dark_mode : Icons.light_mode,
-                          color: isDark ? AppTheme.darkPrimary : AppTheme.primaryDark,
-                          size: 22,
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Karanlık Mod (Dark Mode)',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                              color: isDark ? AppTheme.darkText : AppTheme.textDark,
-                            ),
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: (isDark ? AppTheme.darkPrimary : AppTheme.primary).withValues(alpha: 0.15),
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          Text(
-                            isDark ? 'OLED Koyu Tema Açık' : 'Açık Tema Aktif',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: isDark ? AppTheme.darkTextLight : AppTheme.textLight,
-                            ),
+                          child: Icon(
+                            isDark ? Icons.dark_mode : Icons.light_mode,
+                            color: isDark ? AppTheme.darkPrimary : AppTheme.primaryDark,
+                            size: 22,
                           ),
-                        ],
-                      ),
-                    ],
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Karanlık Mod (Dark Mode)',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                  color: isDark ? AppTheme.darkText : AppTheme.textDark,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              Text(
+                                isDark ? 'OLED Koyu Tema Açık' : 'Açık Tema Aktif',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: isDark ? AppTheme.darkTextLight : AppTheme.textLight,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
+                  const SizedBox(width: 8),
                   Switch(
                     value: widget.isDarkMode,
                     activeThumbColor: isDark ? AppTheme.darkPrimary : AppTheme.primary,
@@ -377,12 +384,15 @@ class _ProfileViewState extends State<ProfileView> {
                         child: const Text('🏆', style: TextStyle(fontSize: 20)),
                       ),
                       const SizedBox(width: 12),
-                      Text(
-                        'Kişisel Rekorlarım (PR)',
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: isDark ? AppTheme.darkText : AppTheme.textDark,
+                      Expanded(
+                        child: Text(
+                          'Kişisel Rekorlarım (PR)',
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                            color: isDark ? AppTheme.darkText : AppTheme.textDark,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
@@ -466,31 +476,29 @@ class _ProfileViewState extends State<ProfileView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: isDark ? AppTheme.secondary.withValues(alpha: 0.2) : AppTheme.secondaryLight,
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Icon(
-                              Icons.straighten,
-                              color: isDark ? AppTheme.secondary : AppTheme.secondaryDark,
-                            ),
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: isDark ? AppTheme.secondary.withValues(alpha: 0.2) : AppTheme.secondaryLight,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Icon(
+                          Icons.straighten,
+                          color: isDark ? AppTheme.secondary : AppTheme.secondaryDark,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          'Vücut Gelişimi Takibi',
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                            color: isDark ? AppTheme.darkText : AppTheme.textDark,
                           ),
-                          const SizedBox(width: 12),
-                          Text(
-                            'Vücut Gelişimi Takibi',
-                            style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                              color: isDark ? AppTheme.darkText : AppTheme.textDark,
-                            ),
-                          ),
-                        ],
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ],
                   ),
@@ -602,20 +610,25 @@ class _ProfileViewState extends State<ProfileView> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'Kişisel Bilgiler & Hedefler',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: isDark ? AppTheme.darkText : AppTheme.textDark,
+                      Expanded(
+                        child: Text(
+                          'Kişisel Bilgiler & Hedefler',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: isDark ? AppTheme.darkText : AppTheme.textDark,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
+                      const SizedBox(width: 8),
                       TextButton.icon(
                         onPressed: () => _recalculateGoals(notify: true),
                         icon: const Icon(Icons.auto_awesome, size: 16),
                         label: const Text('Otomatik Hesapla', style: TextStyle(fontSize: 12)),
                         style: TextButton.styleFrom(
                           foregroundColor: isDark ? AppTheme.darkPrimary : AppTheme.primaryDark,
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                         ),
                       ),
                     ],
@@ -687,16 +700,20 @@ class _ProfileViewState extends State<ProfileView> {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(
-                                          goal['title'] as String,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 14,
-                                            color: isSelected
-                                                ? (isDark ? AppTheme.darkPrimary : AppTheme.primaryDark)
-                                                : (isDark ? AppTheme.darkText : AppTheme.textDark),
+                                        Expanded(
+                                          child: Text(
+                                            goal['title'] as String,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 14,
+                                              color: isSelected
+                                                  ? (isDark ? AppTheme.darkPrimary : AppTheme.primaryDark)
+                                                  : (isDark ? AppTheme.darkText : AppTheme.textDark),
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
+                                        const SizedBox(width: 6),
                                         Container(
                                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                                           decoration: BoxDecoration(
@@ -889,14 +906,18 @@ class _ProfileViewState extends State<ProfileView> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        '📊 Günlük Beslenme Hedefleri',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: isDark ? AppTheme.darkText : AppTheme.textDark,
+                      Expanded(
+                        child: Text(
+                          '📊 Günlük Beslenme Hedefleri',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: isDark ? AppTheme.darkText : AppTheme.textDark,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
+                      const SizedBox(width: 8),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
@@ -1015,14 +1036,18 @@ class _ProfileViewState extends State<ProfileView> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'Akıllı Protein Alarmları',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: isDark ? AppTheme.darkText : AppTheme.textDark,
+                      Expanded(
+                        child: Text(
+                          'Akıllı Protein Alarmları',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: isDark ? AppTheme.darkText : AppTheme.textDark,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
+                      const SizedBox(width: 8),
                       IconButton(
                         onPressed: _addReminder,
                         icon: Icon(

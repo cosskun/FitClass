@@ -218,19 +218,30 @@ class _WorkoutViewState extends State<WorkoutView> {
     showModalBottomSheet(
       context: context,
       backgroundColor: isDark ? AppTheme.darkSurface : Colors.white,
+      isScrollControlled: true,
+      useSafeArea: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
       ),
       builder: (context) {
-        return StatefulBuilder(
-          builder: (BuildContext context, StateSetter setModalState) {
-            if (creatingCustom && selectedCategory != null) {
-              return Container(
-                padding: const EdgeInsets.all(24),
-                height: 550,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+        final sheetHeight = MediaQuery.of(context).size.height * 0.75;
+        return SafeArea(
+          top: false,
+          child: StatefulBuilder(
+            builder: (BuildContext context, StateSetter setModalState) {
+              if (creatingCustom && selectedCategory != null) {
+                return Container(
+                  padding: EdgeInsets.only(
+                    left: 24,
+                    right: 24,
+                    top: 24,
+                    bottom: MediaQuery.of(context).viewInsets.bottom + 24,
+                  ),
+                  height: sheetHeight,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
                     Row(
                       children: [
                         IconButton(
@@ -315,11 +326,12 @@ class _WorkoutViewState extends State<WorkoutView> {
                     ),
                   ],
                 ),
-              );
-            } else if (selectedCategory == null) {
-              return Container(
-                padding: const EdgeInsets.all(24),
-                height: 550,
+              ),
+            );
+              } else if (selectedCategory == null) {
+                return Container(
+                  padding: const EdgeInsets.all(24),
+                  height: sheetHeight,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -404,7 +416,7 @@ class _WorkoutViewState extends State<WorkoutView> {
 
               return Container(
                 padding: const EdgeInsets.all(24),
-                height: 550,
+                height: sheetHeight,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -509,9 +521,10 @@ class _WorkoutViewState extends State<WorkoutView> {
               );
             }
           },
-        );
-      },
-    );
+        ),
+      );
+    },
+  );
   }
 
   void _addExerciseToWorkout(String exerciseId) {
@@ -587,34 +600,40 @@ class _WorkoutViewState extends State<WorkoutView> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          _selectedDate = _selectedDate.subtract(const Duration(days: 1));
-                        });
-                      },
-                      icon: const Icon(Icons.arrow_back_ios, size: 18),
-                    ),
-                    Text(
-                      DateFormat('dd MMM yyyy, EEE', 'tr_TR').format(_selectedDate),
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: isDark ? AppTheme.darkText : AppTheme.textDark,
+                Expanded(
+                  child: Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _selectedDate = _selectedDate.subtract(const Duration(days: 1));
+                          });
+                        },
+                        icon: const Icon(Icons.arrow_back_ios, size: 18),
                       ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          _selectedDate = _selectedDate.add(const Duration(days: 1));
-                        });
-                      },
-                      icon: const Icon(Icons.arrow_forward_ios, size: 18),
-                    ),
-                  ],
+                      Flexible(
+                        child: Text(
+                          DateFormat('dd MMM yyyy, EEE', 'tr_TR').format(_selectedDate),
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: isDark ? AppTheme.darkText : AppTheme.textDark,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _selectedDate = _selectedDate.add(const Duration(days: 1));
+                          });
+                        },
+                        icon: const Icon(Icons.arrow_forward_ios, size: 18),
+                      ),
+                    ],
+                  ),
                 ),
+                const SizedBox(width: 8),
                 // Plate Calculator Tool Button
                 OutlinedButton.icon(
                   onPressed: _showPlateCalculatorDialog,

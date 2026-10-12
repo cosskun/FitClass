@@ -250,14 +250,18 @@ class _AnalyticsViewState extends State<AnalyticsView> with SingleTickerProvider
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'Tarih Aralığı',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        color: isDark ? AppTheme.darkTextLight : AppTheme.textLight,
+                    Flexible(
+                      child: Text(
+                        'Tarih Aralığı',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                          color: isDark ? AppTheme.darkTextLight : AppTheme.textLight,
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
+                    const SizedBox(width: 8),
                     OutlinedButton.icon(
                       onPressed: () => _selectDateRange(context),
                       icon: const Icon(Icons.date_range, size: 16),
@@ -269,6 +273,7 @@ class _AnalyticsViewState extends State<AnalyticsView> with SingleTickerProvider
                         side: BorderSide(color: isDark ? AppTheme.darkBorder : AppTheme.border),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                         foregroundColor: isDark ? AppTheme.darkText : AppTheme.textDark,
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                       ),
                     ),
                   ],
@@ -284,6 +289,7 @@ class _AnalyticsViewState extends State<AnalyticsView> with SingleTickerProvider
                 ),
                 const SizedBox(height: 8),
                 DropdownButtonFormField<String>(
+                  isExpanded: true,
                   initialValue: _selectedExerciseId,
                   decoration: const InputDecoration(
                     contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -294,6 +300,7 @@ class _AnalyticsViewState extends State<AnalyticsView> with SingleTickerProvider
                       value: e.id,
                       child: Text(
                         e.name,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(color: isDark ? AppTheme.darkText : AppTheme.textDark),
                       ),
                     );
@@ -434,25 +441,28 @@ class _AnalyticsViewState extends State<AnalyticsView> with SingleTickerProvider
               children: [
                 Icon(Icons.fitness_center, color: isDark ? AppTheme.darkPrimary : AppTheme.primaryDark),
                 const SizedBox(width: 16),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Bu Dönemde Yapılan Antrenman',
-                      style: TextStyle(
-                        color: isDark ? AppTheme.darkTextLight : AppTheme.textLight,
-                        fontSize: 12,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Bu Dönemde Yapılan Antrenman',
+                        style: TextStyle(
+                          color: isDark ? AppTheme.darkTextLight : AppTheme.textLight,
+                          fontSize: 12,
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
-                    ),
-                    Text(
-                      '${rangeWorkouts.length} Gün',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: isDark ? AppTheme.darkText : AppTheme.textDark,
+                      Text(
+                        '${rangeWorkouts.length} Gün',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: isDark ? AppTheme.darkText : AppTheme.textDark,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -613,27 +623,32 @@ class _AnalyticsViewState extends State<AnalyticsView> with SingleTickerProvider
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            DateFormat('dd MMMM yyyy', 'tr_TR').format(m.date),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              color: isDark ? AppTheme.darkText : AppTheme.textDark,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              DateFormat('dd MMMM yyyy', 'tr_TR').format(m.date),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                                color: isDark ? AppTheme.darkText : AppTheme.textDark,
+                              ),
+                              overflow: TextOverflow.ellipsis,
                             ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            'Kilo: ${m.weight ?? '-'} kg | Bel: ${m.waist ?? '-'} cm | Kol: ${m.arm ?? '-'} cm',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: isDark ? AppTheme.darkTextLight : AppTheme.textLight,
+                            const SizedBox(height: 4),
+                            Text(
+                              'Kilo: ${m.weight ?? '-'} kg | Bel: ${m.waist ?? '-'} cm | Kol: ${m.arm ?? '-'} cm',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: isDark ? AppTheme.darkTextLight : AppTheme.textLight,
+                              ),
+                              overflow: TextOverflow.ellipsis,
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
+                      const SizedBox(width: 8),
                       Icon(Icons.check_circle_outline, color: isDark ? AppTheme.secondary : AppTheme.secondaryDark),
                     ],
                   ),
@@ -672,12 +687,15 @@ class _AnalyticsViewState extends State<AnalyticsView> with SingleTickerProvider
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'Günlük Su Tüketimi (ml)',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: isDark ? AppTheme.darkText : AppTheme.textDark,
+                    Flexible(
+                      child: Text(
+                        'Günlük Su Tüketimi (ml)',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: isDark ? AppTheme.darkText : AppTheme.textDark,
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     const Icon(Icons.water_drop, color: Color(0xFF00B4D8)),
@@ -772,25 +790,28 @@ class _AnalyticsViewState extends State<AnalyticsView> with SingleTickerProvider
               children: [
                 const Icon(Icons.local_drink, color: Color(0xFF00B4D8), size: 28),
                 const SizedBox(width: 16),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Ortalama Günlük Su Tüketimi',
-                      style: TextStyle(
-                        color: isDark ? AppTheme.darkTextLight : AppTheme.textLight,
-                        fontSize: 12,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Ortalama Günlük Su Tüketimi',
+                        style: TextStyle(
+                          color: isDark ? AppTheme.darkTextLight : AppTheme.textLight,
+                          fontSize: 12,
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
-                    ),
-                    Text(
-                      '${avgWater.toInt()} ml / gün',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: isDark ? AppTheme.darkText : AppTheme.textDark,
+                      Text(
+                        '${avgWater.toInt()} ml / gün',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: isDark ? AppTheme.darkText : AppTheme.textDark,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),
